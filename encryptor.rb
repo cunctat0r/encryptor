@@ -11,6 +11,9 @@ class Encryptor
 
   def encrypt(message)
     message.chars.map { |chr| cipher[chr.downcase] }.join('')
-#    cipher[message.downcase]
+  end
+
+  def decrypt(message)
+    message.chars.map { |chr| cipher[chr.downcase] }.join('')
   end
 end
