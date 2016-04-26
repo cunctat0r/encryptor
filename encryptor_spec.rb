@@ -46,4 +46,8 @@ describe Encryptor do
     expect(src).to eq dest
   end
 
+  it 'cracks' do
+    @e.crack('\\qmz&%,N&%%q#,9,Vqxx*,`uyq')
+  end
+
 end

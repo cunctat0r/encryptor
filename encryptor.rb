@@ -1,8 +1,11 @@
 class Encryptor
-  def cipher(rot)
-    init = (' '..'z').to_a
-    rotated = init.rotate(rot)
-    Hash[init.zip(rotated)]
+  def initialize
+    @init = (' '..'z').to_a
+  end
+
+  def cipher(rot)    
+    rotated = @init.rotate(rot)
+    Hash[@init.zip(rotated)]
   end
 
   def encrypt(message, rotation)
@@ -29,6 +32,14 @@ class Encryptor
     line =  input.read
     output.write(decrypt(line, rot))
     input.close
+    output.close
+  end
+
+  def crack(message)
+    output = File.open('crack.txt', 'w')
+    @init.count.times do |attempt|
+      output.write("#{attempt} -> #{decrypt(message, attempt)}\n")      
+    end
     output.close
   end
 end
