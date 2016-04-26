@@ -1,19 +1,16 @@
 class Encryptor
-  def cipher
-    {'a' => 'n', 'b' => 'o', 'c' => 'p', 'd' => 'q',
-     'e' => 'r', 'f' => 's', 'g' => 't', 'h' => 'u',
-     'i' => 'v', 'j' => 'w', 'k' => 'x', 'l' => 'y',
-     'm' => 'z', 'n' => 'a', 'o' => 'b', 'p' => 'c',
-     'q' => 'd', 'r' => 'e', 's' => 'f', 't' => 'g',
-     'u' => 'h', 'v' => 'i', 'w' => 'j', 'x' => 'k',
-     'y' => 'l', 'z' => 'm'}
+  def cipher(rot)
+    init = (' '..'z').to_a
+    rotated = init.rotate(rot)
+    Hash[init.zip(rotated)]
   end
 
-  def encrypt(message)
-    message.chars.map { |chr| cipher[chr.downcase] }.join('')
+  def encrypt(message, rotation)
+    message.chars.map { |chr| cipher(rotation)[chr] }.join('')
   end
 
-  def decrypt(message)
-    message.chars.map { |chr| cipher[chr.downcase] }.join('')
+  def decrypt(message, rotation)
+    total_chars = cipher(rotation).keys.length
+    message.chars.map { |chr| cipher(total_chars - rotation)[chr] }.join('')
   end
 end
