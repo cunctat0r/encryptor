@@ -42,7 +42,7 @@ describe Encryptor do
     @e.encrypt_file(in_file, 16)
     @e.decrypt_file("#{in_file}.encrypted", 16)
     src = File.open(in_file, 'r').read
-    dest = File.open("#{in_file}.encrypted.decrypted", 'r').read
+    dest = File.open("#{in_file}.decrypted", 'r').read
     expect(src).to eq dest
   end
 

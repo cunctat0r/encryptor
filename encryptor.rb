@@ -25,7 +25,7 @@ class Encryptor
 
   def decrypt_file(file_name, rot)
     input = File.open(file_name, 'r')
-    output = File.open("#{file_name}.decrypted", 'w')
+    output = File.open(file_name.gsub('encrypted', 'decrypted'), 'w')
     line =  input.read
     output.write(decrypt(line, rot))
     input.close
