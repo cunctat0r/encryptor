@@ -13,4 +13,22 @@ class Encryptor
     total_chars = cipher(rotation).keys.length
     message.chars.map { |chr| cipher(total_chars - rotation)[chr] }.join('')
   end
+
+  def encrypt_file(file_name, rot)
+    input = File.open(file_name, 'r')
+    output = File.open("#{file_name}.encrypted", 'w')
+    line =  input.read
+    output.write(encrypt(line, rot))    
+    input.close
+    output.close
+  end
+
+  def decrypt_file(file_name, rot)
+    input = File.open(file_name, 'r')
+    output = File.open("#{file_name}.decrypted", 'w')
+    line =  input.read
+    output.write(decrypt(line, rot))
+    input.close
+    output.close
+  end
 end

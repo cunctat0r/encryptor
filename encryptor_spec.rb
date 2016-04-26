@@ -36,4 +36,14 @@ describe Encryptor do
   it 'encrypt and decrypt' do
     expect(@e.decrypt(@e.encrypt('Hello, World!', 16), 16)).to eq 'Hello, World!'
   end
+
+  it 'encrypts end decrypts file' do
+    in_file = 'secret.txt'
+    @e.encrypt_file(in_file, 16)
+    @e.decrypt_file("#{in_file}.encrypted", 16)
+    src = File.open(in_file, 'r').read
+    dest = File.open("#{in_file}.encrypted.decrypted", 'r').read
+    expect(src).to eq dest
+  end
+
 end
